@@ -50,14 +50,6 @@ class BasicAudioDataset(Dataset):
         self.files = df[['filename']].values.reshape(-1)
         self.positive_pairs = df[['positive_pair']].values.reshape(-1)
         self.negative_pairs = df[['negative_pair']].values.reshape(-1)
-        # self.scenes = df[['scene_label']].values.reshape(-1)
-        # self.scenes_dict = {}
-        # i = 0
-        # for item in self.scenes:
-        #   if item not in self.scenes_dict:
-        #      self.scenes_dict[item] = i
-        #    i += 1
-
         self.sr = sr
         self.dur = duration
         self.gain_augment = gain_augment

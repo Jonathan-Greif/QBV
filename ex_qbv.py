@@ -73,7 +73,7 @@ class DualEncoder(pl.LightningModule):
                 self.block2.load_state_dict(block2_dict)
             print("Supervised pre-training with vocal imitations used")
 
-        self.model = get_model(self.block1, self.block2, config.similarity, dropout=0.2, single=single)
+        self.model = get_model(self.block1, self.block2, config.similarity, dropout=config.dropout, single=single)
 
     def mel_forward(self, x):
         """
