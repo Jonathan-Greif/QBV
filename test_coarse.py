@@ -56,9 +56,7 @@ def calculate(config):
 
 
 if __name__ == '__main__':
-
     parser = argparse.ArgumentParser(description='Example of parser. ')
-
     # paths
     parser.add_argument('--directory', type=str, default="datasets/data/coarse grained")
     parser.add_argument('--path_ref', type=str,
@@ -68,7 +66,6 @@ if __name__ == '__main__':
                                  None))
     parser.add_argument('--state_dict_module', type=str,
                         default="resources/ct_nt_xent_fold0mn10d10s32_01.pt")
-
     # arguments
     parser.add_argument('--arch', type=str, default="MN")  # VGGish, M-VGGish, MN, CQT, 2DFT
     parser.add_argument('--pretrained', default=False, action='store_true')

@@ -38,11 +38,11 @@ def calculate(config):
         if key == 239:  # there don't exist non reference sounds for this concept
             continue
         # get the embeddings of the reference sound and of all non reference sounds from this concept (~10 in total)
-        refs_emb = get_embeddings_fine(all_refs[key], all_non_refs[key], path_ref, module_ref,
-                                  arch, sr_down, sr_up, dur)
+        refs_emb = get_embeddings_fine(all_refs[key], all_non_refs[key], path_ref, module_ref, arch,
+                                       sr_down, sr_up, dur)
         # calculate MRR for the current concept. rank1 and rank2 are counter and get evaluated at the end.
         mrr, rank1, rank2 = calc_mrr_fine(all_imitations[key], refs_emb, module_im, path_im, arch, sr_down, sr_up, dur,
-                                     rank1, rank2)
+                                          rank1, rank2)
         print(f"\rkey: {key}, MRR: {round(mrr,4)}", end='    ', flush=True)
         mrr_lst.append(mrr)
 
@@ -54,9 +54,7 @@ def calculate(config):
 
 
 if __name__ == '__main__':
-
     parser = argparse.ArgumentParser(description='Example of parser. ')
-
     # paths
     parser.add_argument('--path_im', type=str,
                         default="datasets/data/fine grained/VocalImitationSet/vocal_imitations")
@@ -69,7 +67,6 @@ if __name__ == '__main__':
                                  "resources/VocalSketch120_mn10d10s32_320.pt"))
     parser.add_argument('--state_dict_module', type=str,
                         default="resources/ct_fine_nt_xent_mn10d10s32_01.pt")
-
     # arguments
     parser.add_argument('--arch', type=str, default="MN")  # VGGish, M-VGGish, MN, CQT, 2DFT
     parser.add_argument('--pretrained', default=False, action='store_true')
