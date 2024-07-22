@@ -211,7 +211,7 @@ class PreprocessDataset(Dataset):
         return len(self.dataset)
 
 
-class RollFunc():
+class RollFunc:
     """
     Roll waveform over time
     """

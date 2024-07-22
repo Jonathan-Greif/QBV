@@ -4,6 +4,7 @@ import numpy as np
 import librosa
 from torch.distributions.beta import Beta
 
+
 def NAME_TO_WIDTH(name):
     map = {
         'mn01': 0.1,
@@ -27,6 +28,7 @@ def NAME_TO_WIDTH(name):
 
     return w
 
+
 def mixup(size, alpha):
     # https://arxiv.org/abs/1710.09412
     rn_indices = torch.randperm(size)  # randomly shuffles batch indices
@@ -34,6 +36,7 @@ def mixup(size, alpha):
     lambd = np.concatenate([lambd[:, None], 1 - lambd[:, None]], 1).max(1)  # choose lambda closer to 1
     lam = torch.FloatTensor(lambd)  # convert to pytorch float tensor
     return rn_indices, lam
+
 
 def mixstyle(x, p=0.4, alpha=0.4, eps=1e-6, mix_labels=False):
     if np.random.rand() > p:
@@ -57,6 +60,7 @@ def mixstyle(x, p=0.4, alpha=0.4, eps=1e-6, mix_labels=False):
         return x, perm, lmda
     return x
 
+
 def wav_to_torch(path, sr=32000, dur=10):
     """
     From given path convert a WAV file into a tensor of an audio sample
@@ -75,6 +79,7 @@ def wav_to_torch(path, sr=32000, dur=10):
     sig = torch.from_numpy(sig[np.newaxis])
     return sig.unsqueeze(0)
 
+
 class NTXent(nn.Module):
     """
     Adapted NT-Xent loss for supervised cross-domain retrieval task.
@@ -87,16 +92,16 @@ class NTXent(nn.Module):
         self.sim = nn.CosineSimilarity(dim=1, eps=1e-6)
         self.tau = temperature
 
-    def forward(self, imitation_embeds, recording_embeds, labels, mixup=False):
+    def forward(self, imitation_embeds, recording_embeds, labels, mxup=False):
 
         n = imitation_embeds.shape[0]
         i2r = torch.stack([self.sim(im, recording_embeds) for im in imitation_embeds]) / self.tau
 
-        if mixup:
+        if mxup:
             labels1, labels2 = labels
             mask = [0 if (labels1[i] in (labels1[k], labels2[k]) or labels2[i] in (labels1[k], labels2[k])) and k != i
                     else 1 for i in range(n) for k in range(n)]
-            mask = np.array(mask).reshape(n,n)
+            mask = np.array(mask).reshape(n, n)
         else:
             mask = labels.expand(n, n).eq(labels.expand(n, n).t()).to(i2r.device)
             mask_diag = mask.diag()
@@ -106,4 +111,3 @@ class NTXent(nn.Module):
         loss_i2r = [self.loss(i2r[i][mask[i]])[sum(mask[i][:i])] for i in range(n)]
         loss = ((- sum(loss_i2r)) / len(loss_i2r))
         return loss
-

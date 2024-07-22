@@ -71,7 +71,9 @@ class DualEncoder(pl.LightningModule):
                 block2_dict = {k: pretrained_dict_b2[k] for k, _ in self.block2.state_dict().items() if
                                k in pretrained_dict_b2}
                 self.block2.load_state_dict(block2_dict)
-            print("Supervised pre-training with vocal imitations used")
+            print("Supervised pre-training with vocal imitations is used. \n",
+                  f"Imitation-Encoder: {config.path_state_dict[0]}\n",
+                  f"Recording-Encoder: {config.path_state_dict[1]}")
 
         self.model = get_model(self.block1, self.block2, config.similarity, dropout=config.dropout, single=single)
 
@@ -171,7 +173,7 @@ def train(config):
     # Train dual encoders for QBV
 
     pretrained = "pre" if config.pretrained else ""
-    if config.fine_coarse:
+    if config.fine_grained:
         ID = (f"ct_fine_{config.criterion}_" + config.pretrained_name[:4] + f"d{int(config.duration)}" +
               f"s{int(config.resample_rate / 1000)}{pretrained}_" + str(config.id))
     else:
@@ -236,7 +238,7 @@ if __name__ == '__main__':
     # location to store resample waveform
     parser.add_argument('--cache_path', type=str, default="cached")
     parser.add_argument('--fine_grained', default=False, action='store_true')
-    parser.add_argument('--fold', type=int, default=10)
+    parser.add_argument('--fold', type=int, default=2)
 
     # Encoder
     parser.add_argument('--n_classes', type=int, default=476)

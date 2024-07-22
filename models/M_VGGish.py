@@ -2,6 +2,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 
+
 class M_VGGish(nn.Module):
     """
     2s in the style of: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8683461
@@ -15,8 +16,6 @@ class M_VGGish(nn.Module):
 
         self.sr = sr  # sampling rate
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-
-
 
     def forward(self, x):
         two_sec_segments, x = self.get_number_of_2s_segments(x)

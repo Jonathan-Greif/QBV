@@ -7,7 +7,6 @@ class AugmentMelSTFT(nn.Module):
     def __init__(self, n_mels=128, sr=32000, win_length=800, hopsize=320, n_fft=1024, freqm=48, timem=192,
                  fmin=0.0, fmax=None, fmin_aug_range=10, fmax_aug_range=2000):
         torch.nn.Module.__init__(self)
-        # adapted from: https://github.com/CPJKU/kagglebirds2020/commit/70f8308b39011b09d41eb0f4ace5aa7d2b0e806e
         # taken from: https://github.com/fschmid56/EfficientAT/blob/main/models/preprocess.py
 
         self.win_length = win_length
@@ -50,8 +49,8 @@ class AugmentMelSTFT(nn.Module):
             fmin = self.fmin
             fmax = self.fmax
 
-        mel_basis, _ = torchaudio.compliance.kaldi.get_mel_banks(self.n_mels,  self.n_fft, self.sr,
-                                        fmin, fmax, vtln_low=100.0, vtln_high=-500., vtln_warp_factor=1.0)
+        mel_basis, _ = torchaudio.compliance.kaldi.get_mel_banks(self.n_mels,  self.n_fft, self.sr, fmin, fmax,
+                                                                 vtln_low=100.0, vtln_high=-500., vtln_warp_factor=1.0)
         mel_basis = torch.as_tensor(torch.nn.functional.pad(mel_basis, (0, 1), mode='constant', value=0),
                                     device=x.device)
         with torch.cuda.amp.autocast(enabled=False):

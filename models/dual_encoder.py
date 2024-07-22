@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 
+
 class Dual_Encoder(nn.Module):
     """
     Framework for the dual encoder
@@ -13,7 +14,7 @@ class Dual_Encoder(nn.Module):
         self.single = single
         
         self.im = block1
-        self.rec = block2
+        self.ref = block2
 
         if similarity == "cosine":
             self.sim = torch.nn.CosineSimilarity(dim=1, eps=1e-6)
@@ -27,14 +28,13 @@ class Dual_Encoder(nn.Module):
                 nn.Sigmoid()
             )
 
-
     def forward(self, x1, x2, criterion="BCE"):
         if self.single:
             _, x1 = self.im(x1)
             _, x2 = self.im(x2)
         else:
             _, x1 = self.im(x1)
-            _, x2 = self.rec(x2)
+            _, x2 = self.ref(x2)
 
         if criterion == "nt_xent":
             return x1, x2
@@ -47,7 +47,6 @@ class Dual_Encoder(nn.Module):
             x = self.sim(x)
 
         return x.squeeze().double()
-
 
 
 def get_model(block1, block2, similarity="cosine", dropout=0.2, single=False):
