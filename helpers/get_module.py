@@ -15,9 +15,10 @@ def replace_fold_number(state_dict_module, fold):
 
 
 class Encoder(torch.nn.Module):
-    def __init__(self, preprocess, encoder):
+    def __init__(self, module, encoder):
         super(Encoder, self).__init__()
-        self.pre = preprocess
+        self.mel = module.mel
+        self.pre = module.mel_forward
         self.encoder = encoder
 
     def forward(self, x):
@@ -27,7 +28,8 @@ class Encoder(torch.nn.Module):
 
 
 class Config_QBV:
-    def __init__(self, width=1.0, sim="cosine", single=False, pretrained=False, state_dict_pretrained=(None, None)):
+    def __init__(self, width=1.0, sim="cosine", single=False, pretrained=False, 
+    		 state_dict_pretrained=(None, None), fold=-1):
         assert not (pretrained and state_dict_pretrained is None), \
             "Pretrained is True but state_dict_pretrained is None"
         # model
@@ -37,7 +39,7 @@ class Config_QBV:
         self.model_width = width
         self.head_type = "mlp"
         self.se_dims = "c"
-        self.n_classes = 120
+        self.n_classes = 476 if fold >= 0 else 120
         self.pretrained = pretrained
         self.path_state_dict = state_dict_pretrained
         self.similarity = sim
@@ -63,18 +65,19 @@ class Config_QBV:
 def get_module(arch: str, pretrained: bool, own: bool, state_dict_module: str, state_dict_pretrained: tuple,
                fold: int = -1):
     if own:
-        conf = Config_QBV(sim="cosine")
+        conf = Config_QBV(sim="cosine", fold=fold)
         module = ex_qbv.DualEncoder(conf)
         if fold >= 0:
-            pretrained_dict = replace_fold_number(state_dict_module, fold)
+            state_dict_module = replace_fold_number(state_dict_module, fold)
+            pretrained_dict = torch.load(state_dict_module)
         else:
             pretrained_dict = torch.load(state_dict_module)
         model_dict = {k: pretrained_dict[k] for k, _ in module.model.state_dict().items() if
                       k in pretrained_dict}
         module.model.load_state_dict(model_dict)
         print("Pretrained: " + state_dict_module)
-        module_im = Encoder(module.mel_forward, module.block1)
-        module_ref = Encoder(module.mel_forward, module.block2)
+        module_im = Encoder(module, module.block1)
+        module_ref = Encoder(module, module.block2)
         for model in [module_im, module_ref]:
             model.to(device)
             model.eval()
@@ -96,8 +99,8 @@ def get_module(arch: str, pretrained: bool, own: bool, state_dict_module: str, s
     elif arch == "MN":
         conf = Config_QBV(sim="cosine", pretrained=pretrained, state_dict_pretrained=state_dict_pretrained)
         module = ex_qbv.DualEncoder(conf)
-        module_im = Encoder(module.mel_forward, module.block1)
-        module_ref = Encoder(module.mel_forward, module.block2)
+        module_im = Encoder(module, module.block1)
+        module_ref = Encoder(module, module.block2)
         for model in [module_im, module_ref]:
             model.to(device)
             model.eval()

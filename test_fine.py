@@ -66,7 +66,7 @@ if __name__ == '__main__':
                         default=("resources/VocalSketch120_mn10d10s32_320.pt",
                                  "resources/VocalSketch120_mn10d10s32_320.pt"))
     parser.add_argument('--state_dict_module', type=str,
-                        default="resources/ct_fine_nt_xent_mn10d10s32_01.pt")
+                        default="resources/ct_fine_nt_xent_mn10d10s32pre_01.pt")
     # arguments
     parser.add_argument('--arch', type=str, default="MN")  # VGGish, M-VGGish, MN, CQT, 2DFT
     parser.add_argument('--pretrained', default=False, action='store_true')

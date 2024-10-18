@@ -23,6 +23,8 @@ def calculate(config):
     references = get_refs_dict(path_ref)
 
     mrr_folds = []
+    r1_folds = []
+    r2_folds = []
     fold = 0
     # get encoders for sound recordings and vocal imitations (is the same in some cases)
     # sr_up is the resample rate required for the selected modules
@@ -31,8 +33,8 @@ def calculate(config):
     # for each fold repeat
     for i in range(10):
         # in this implementation only the own module was trained with data from the folds
-        # for the other modules the encoders stay the same
-        if config.own_module:
+        # for the other modules the encoders stay the same for all folds
+        if config.own_module and i>0:
             module_ref, module_im, sr_up = get_module(arch, config.pretrained, config.own_module,
                                                       config.state_dict_module, config.state_dict_pretrained, fold)
         # get the imitations with their labels (concepts) from the current fold
@@ -40,7 +42,7 @@ def calculate(config):
         # select all reference sounds that belong to this fold
         refs_in_test = test_df["scene_label"].unique()
         refs_in_test = [references[x] for x in refs_in_test]
-        # get the embeddings of those reference sounds and a sorted list of their concepts
+        # get the embeddings of relevant reference sounds and a sorted list of their concepts
         ref_embs, idx_lst = get_embeddings_coarse(refs_in_test, module_ref, path_ref, arch, sr_down, sr_up, dur)
         # calculate MRR, MeanRecall@1 and MeanReacall@2 for this particular fold
         mrr, r1, r2 = calc_mrr_coarse(test_df, directory, ref_embs, idx_lst, module_im, arch, sr_down, sr_up, dur)
@@ -48,10 +50,16 @@ def calculate(config):
         print(f"\rFold: {fold}, MRR: {round(mrr, 4)}, mR@1: {round(r1, 4)}, mR@2: {round(r2, 4)}",
               end='      ', flush=True)
         mrr_folds.append(mrr)
+        r1_folds.append(r1)
+        r2_folds.append(r2)
         fold += 1
 
     mrr_folds = np.array(mrr_folds)
     print(f"\rMeanReciprocalRank: {round(mrr_folds.mean(), 4)}", end='            \n', flush=True)
+    r1_folds = np.array(r1_folds)
+    r2_folds = np.array(r2_folds)
+    print(f"MeanReciprocalRank: {round(r1_folds.mean(), 4)}")
+    print(f"MeanReciprocalRank: {round(r2_folds.mean(), 4)}")
     print(f"MRR std: {round(mrr_folds.std(), 4)}")
 
 

@@ -183,7 +183,7 @@ def train(config):
     wandb_logger = WandbLogger(
         project=config.project,
         notes="Pipeline for QBV",
-        tags=["VII"],
+        tags=["fine-grained" if config.fine_grained else "coarse-grained"],
         config=config,
         name=config.pretrained_name + " lr=" + str(config.lr) + " wd=" + str(config.weight_decay) +
             f" mixupalpha={config.mixup_alpha}" + f" mixstylep={config.mixstyle_p}" + f" pretrained={config.pretrained}"
