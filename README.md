@@ -1,6 +1,6 @@
 # Query-by-Vocal Imitation (QBV)
 
-In this repository, we publish the pre-trained models and the code described in the paper:
+In this repository, we publish the model checkpoints and the code described in the paper:
 
 - **Title**: [Improving Query-by-Vocal Imitation with Contrastive Learning and Audio Pretraining](https://dcase.community/documents/workshop2024/proceedings/DCASE2024Workshop_Greif_36.pdf)
 - **Authors**: Jonathan Greif, Florian Schmid, Paul Primus, Gerhard Widmer
