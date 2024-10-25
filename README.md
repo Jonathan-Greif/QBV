@@ -5,7 +5,7 @@ In this repository, we publish the model checkpoints and the code described in t
 - **Title**: [Improving Query-by-Vocal Imitation with Contrastive Learning and Audio Pretraining](https://dcase.community/documents/workshop2024/proceedings/DCASE2024Workshop_Greif_36.pdf)
 - **Authors**: Jonathan Greif, Florian Schmid, Paul Primus, Gerhard Widmer
 - **Workshop**: Proceedings of the Workshop on Detection and Classification of Acoustic Scenes and Events, (DCASE), Tokyo, Japan, 2024
-
+- **Award**: Best Student Paper Award
 
 ## Abstract
 
@@ -65,11 +65,13 @@ For questions or inquiries, please contact me at jonathan.greif@jku.at.
 If you use this code, please cite our paper:
 
 ```
- @inproceedings{qbv_greif,
-  author       = {Greif, Jonathan and Schmid, Florian and Primus, Paul and Widmer, Gerhard},
-  title        = {Improving Query-by-Vocal Imitation with Contrastive Learning and Audio Pretraining},
-  booktitle    = {Proceedings of the Workshop on Detection and Classification of
-                  Acoustic Scenes and Events, ({DCASE}), Tokyo, Japan},
-  year         = {2024},
+@inproceedings{Greif2024,
+    author = "Greif, Jonathan and Schmid, Florian and Primus, Paul and Widmer, Gerhard",
+    title = "Improving Query-By-Vocal Imitation with Contrastive Learning and Audio Pretraining",
+    booktitle = "Proceedings of the Detection and Classification of Acoustic Scenes and Events 2024 Workshop (DCASE2024)",
+    address = "Tokyo, Japan",
+    month = "October",
+    year = "2024",
+    pages = "51--55"
 }
 ```
