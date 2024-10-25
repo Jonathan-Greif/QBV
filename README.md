@@ -2,7 +2,7 @@
 
 In this repository, we publish the pre-trained models and the code described in the paper:
 
-- *Improving Query-by-Vocal Imitation with Contrastive Learning and Audio Pretraining*. The paper has been presented in DCASE 2024.
+- _Improving Query-by-Vocal Imitation with Contrastive Learning and Audio Pretraining_. The paper has been presented in DCASE 2024.
 
 ## Abstract
 
