@@ -1,5 +1,14 @@
 # Query-by-Vocal Imitation (QBV)
 
+## Abstract
+
+Query-by-Vocal Imitation (QBV) is about searching audio files within databases using vocal imitations created by the user’s voice.
+Since most humans can effectively communicate sound concepts through voice, QBV offers the more intuitive and convenient approach compared to text-based search. 
+To fully leverage QBV, developing robust audio feature representations for both the vocal imitation and the original sound is crucial. 
+In this paper, we present a new system for QBV that utilizes the feature extraction capabilities of Convolutional Neural Networks pre-trained with large-scale general-purpose audio datasets. 
+We integrate these pre-trained models into a dual encoder architecture and fine-tune them end-to-end using contrastive learning. 
+A distinctive aspect of our proposed method is the fine-tuning strategy of pre-trained models using an adapted NT-Xent loss for contrastive learning, creating a shared embedding space for reference recordings and vocal imitations. 
+The proposed system significantly enhances audio retrieval performance, establishing a new state of the art on both coarse- and fine-grained QBV tasks.
 
 ## Getting Started
 
