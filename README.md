@@ -1,5 +1,9 @@
 # Query-by-Vocal Imitation (QBV)
 
+In this repository, we publish the pre-trained models and the code described in the paper:
+
+    Improving Query-by-Vocal Imitation with Contrastive Learning and Audio Pretraining. The paper has been presented in DCASE 2024.
+
 ## Abstract
 
 Query-by-Vocal Imitation (QBV) is about searching audio files within databases using vocal imitations created by the user’s voice.
