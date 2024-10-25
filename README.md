@@ -1,6 +1,5 @@
 # Query-by-Vocal Imitation (QBV)
 
-The model checkpoints will be released soon.
 
 ## Getting Started
 
