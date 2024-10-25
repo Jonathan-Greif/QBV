@@ -60,7 +60,7 @@ python test_fine.py --arch=2DFT --sr_down=8000 --dur=15.4
 ```
 
 ## Contact
-For questions or inquiries, please contact Jonathan Greif at jonathan.greif@jku.at.
+For questions or inquiries, please contact Jonathan Greif at jonathan.greif(at)jku.at.
 
 If you use this code, please cite our paper:
 
