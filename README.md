@@ -2,9 +2,19 @@
 
 In this repository, we publish the pre-trained models and the code described in the paper:
 
-- _Improving Query-by-Vocal Imitation with Contrastive Learning and Audio Pretraining_.
+- **Title**: [Improving Query-by-Vocal Imitation with Contrastive Learning and Audio Pretraining](link_to_paper](https://dcase.community/documents/workshop2024/proceedings/DCASE2024Workshop_Greif_36.pdf)
+- **Authors**: [Jonathan Greif], [Florian Schmid], [Paul Primus], [Gerhard Widmer]
+- **Workshop**: [Proceedings of the Workshop on Detection and Classification of Acoustic Scenes and Events, (DCASE), Tokyo, Japan], [2024]
 
-The paper has been presented at [DCASE 2024](https://dcase.community/documents/workshop2024/proceedings/DCASE2024Workshop_Greif_36.pdf).
+If you use this code, please cite our paper:
+
+@inproceedings{qbv_greif,
+  author       = {Greif, Jonathan and Schmid, Florian and Primus, Paul and Widmer, Gerhard},
+  title        = {Improving Query-by-Vocal Imitation with Contrastive Learning and Audio Pretraining},
+  booktitle    = {Proceedings of the Workshop on Detection and Classification of
+                  Acoustic Scenes and Events, ({DCASE}), Tokyo, Japan},
+  year         = {2024},
+}
 
 ## Abstract
 
