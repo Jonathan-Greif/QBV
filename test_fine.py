@@ -1,9 +1,9 @@
 import argparse
 import numpy as np
 
-from helpers.get_files import get_file_list, get_non_refs_dict, get_imitations_dict
-from helpers.get_module import get_module
-from helpers.utils_test import get_embeddings_fine, calc_mrr_fine
+from .helpers.get_files import get_file_list, get_non_refs_dict, get_imitations_dict
+from .helpers.get_module import get_module
+from .helpers.utils_test import get_embeddings_fine, calc_mrr_fine
 
 
 def calculate(config):

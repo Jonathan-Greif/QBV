@@ -7,14 +7,14 @@ import pytorch_lightning as pl
 from pytorch_lightning.loggers import WandbLogger
 from pytorch_lightning.callbacks import LearningRateMonitor, GradientAccumulationScheduler
 
-from models.preprocess import AugmentMelSTFT
-from models.mn.model import get_model as get_mobilenet
-from models.dual_encoder import get_model
+from .models.preprocess import AugmentMelSTFT
+from .models.mn.model import get_model as get_mobilenet
+from .models.dual_encoder import get_model
 
-from datasets.audiodataset import get_val_set, get_training_set
-from helpers.init import worker_init_fn
-from helpers.utils import NAME_TO_WIDTH, mixup, mixstyle, NTXent
-from helpers.lr_schedule import exp_warmup_linear_down
+from .datasets.audiodataset import get_val_set, get_training_set
+from .helpers.init import worker_init_fn
+from .helpers.utils import NAME_TO_WIDTH, mixup, mixstyle, NTXent
+from .helpers.lr_schedule import exp_warmup_linear_down
 
 
 class DualEncoder(pl.LightningModule):

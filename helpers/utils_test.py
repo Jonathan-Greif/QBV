@@ -2,7 +2,7 @@ import os
 import numpy as np
 import torch
 import librosa
-from helpers.cqt.cqt import cqt
+from ..helpers.cqt.cqt import cqt
 
 
 device = "cuda" if torch.cuda.is_available() else "cpu"

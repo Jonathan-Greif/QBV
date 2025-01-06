@@ -1,7 +1,7 @@
 import re
 import torch
-import ex_qbv
-from models.M_VGGish import M_VGGish
+from .. import ex_qbv
+from ..models.M_VGGish import M_VGGish
 
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
