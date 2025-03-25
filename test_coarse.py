@@ -3,9 +3,9 @@ import argparse
 import numpy as np
 import pandas as pd
 
-from .helpers.get_files import get_refs_dict
-from .helpers.get_module import get_module
-from .helpers.utils_test import get_embeddings_coarse, calc_mrr_coarse
+from helpers.get_files import get_refs_dict
+from helpers.get_module import get_module
+from helpers.utils_test import get_embeddings_coarse, calc_mrr_coarse
 
 
 def calculate(config):

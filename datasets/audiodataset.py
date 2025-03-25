@@ -108,7 +108,7 @@ class BasicAudioDataset(Dataset):
     def _getitem_helper_3(self, pos_or_neg, index):
         pair = "pos_pair" if pos_or_neg == 1 else "neg_pair"
         if self.cache_path_rec:
-            cache_name = self.negative_pairs[index][17:-4] if pos_or_neg == 1 else self.positive_pairs[index][17:-4]
+            cache_name = self.positive_pairs[index][17:-4] if pos_or_neg == 1 else self.negative_pairs[index][17:-4]
             cpath_rec = os.path.join(self.cache_path_rec, cache_name + ".pt")
             recording = self._getitem_helper_1(cpath_rec, index, file=pair)
         else:  # no caching used

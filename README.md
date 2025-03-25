@@ -1,3 +1,10 @@
+
+
+# 🚨 Critical Issue in the Dataloader 🚨  
+
+If you cloned this repository **before 25.03.2025**, there was an small but critical **issue in the dataloader** that basically hindered training. Sorry for the inconvenience!
+
+
 # Query-by-Vocal Imitation (QBV)
 
 In this repository, we publish the model checkpoints and the code described in the paper:
@@ -17,7 +24,10 @@ We integrate these pre-trained models into a dual encoder architecture and fine-
 A distinctive aspect of our proposed method is the fine-tuning strategy of pre-trained models using an adapted NT-Xent loss for contrastive learning, creating a shared embedding space for reference recordings and vocal imitations. 
 The proposed system significantly enhances audio retrieval performance, establishing a new state of the art on both coarse- and fine-grained QBV tasks.
 
+
 ## Getting Started
+
+First, create a new Conda environment and install the required dependencies:  
 
 ```
 conda create -n qbv python=3.8
@@ -28,41 +38,57 @@ pip install -r requirements.txt
 ```
 
 ## Experiments 
+The settings are detailed in Section 4 of the paper.
 
 ### Training
 
-Coarse-grained
+Train the model in the coarse-grained QBV setting:
 ```
-python ex_qbv.py --roll --fold=0 --id=001
+python ex_qbv.py --roll --fold=0 --id=001 --save_model
 ```
-Fine-grained
+Train the model in the fine-grained QBV setting:
 ```
-python ex_qbv.py --roll --fine_grained --id=001
+python ex_qbv.py --roll --fine_grained --id=001 --save_model
 ```
 
 ### Testing
 
-Coarse-grained
+#### Coarse-grained Testing
+
+Run the default test:
 ```
 python test_coarse.py --own_module
-
+```
+Test with M-VGGish architecture, 16kHz sampling rate, and item duration of 15.4s:
+```
 python test_coarse.py --arch=M-VGGish --sr_down=16000 --dur=15.4
-
+```
+Test with 2DFT architecture, 8kHz sampling rate, and item duration of 15.4s:
+```
 python test_coarse.py --arch=2DFT --sr_down=8000 --dur=15.4
 ```
-Fine-grained
+#### Fine-grained Testing
+
+Run the default fine-grained test:
 ```
 python test_fine.py --own_module
-
+```
+Test with M-VGGish architecture, 16kHz sampling rate, and item duration of 15.4s:
+```
 python test_fine.py --arch=M-VGGish --sr_down=16000 --dur=15.4
-
+```
+Test with 2DFT architecture, 8kHz sampling rate, and item duration of 15.4s:
+```
 python test_fine.py --arch=2DFT --sr_down=8000 --dur=15.4
 ```
 
 ## Contact
-For questions or inquiries, please contact me at jonathan.greif@jku.at.
 
-If you use this code, please cite our paper:
+For questions or inquiries, please don't hesitate to contact me at [jonathan.greif@jku.at](mailto:jonathan.greif@jku.at).
+
+## Citation
+
+If you find this work useful, please cite our paper:
 
 ```
 @inproceedings{Greif2024,

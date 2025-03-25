@@ -6,10 +6,10 @@ from torchvision.ops.misc import ConvNormActivation
 from torch.hub import load_state_dict_from_url
 import urllib.parse
 
-from ...models.mn.utils import cnn_out_size
-from ...models.mn.block_types import InvertedResidualConfig, InvertedResidual
-from ...models.mn.attention_pooling import MultiHeadAttentionPooling
-from ...helpers.utils import NAME_TO_WIDTH
+from models.mn.utils import cnn_out_size
+from models.mn.block_types import InvertedResidualConfig, InvertedResidual
+from models.mn.attention_pooling import MultiHeadAttentionPooling
+from helpers.utils import NAME_TO_WIDTH
 
 
 # Adapted version of MobileNetV3 pytorch implementation
