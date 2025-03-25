@@ -2,8 +2,8 @@ from __future__ import print_function, division
 
 import numpy as np
 
-from ...helpers.cqt.gen_filterbank import gen_filterbank
-from ...helpers.cqt.apply_filterbank import apply_filterbank
+from helpers.cqt.gen_filterbank import gen_filterbank
+from helpers.cqt.apply_filterbank import apply_filterbank
 
 def cqt(signal, bins_per_octave, samp_rate, fmin, fmax,
             rasterize='full', phasemode='global', outputFormat='sparse',

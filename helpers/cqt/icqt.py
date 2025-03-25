@@ -1,7 +1,7 @@
 from __future__ import print_function,division
 
-from ...helpers.cqt.gen_inv_filterbank import gen_inv_filterbank
-from ...helpers.cqt.apply_inv_filterbank import  apply_inv_filterbank
+from helpers.cqt.gen_inv_filterbank import gen_inv_filterbank
+from helpers.cqt.apply_inv_filterbank import  apply_inv_filterbank
 
 
 def icqt(Xcq):
